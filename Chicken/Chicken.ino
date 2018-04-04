@@ -1,5 +1,6 @@
 #include <motor.h>
 
+
 #include <Wire.h>
 
 #include <VL53L0X.h>
@@ -10,7 +11,7 @@
 #include <I2Cdev.h>
 
 MPU6050 gyro;
-Motor left(6,5), right(9,10);
+Motor left(6,5), right(10,9);
 float origin = 0;
 float integral = 0;
 float lasterror = 0;
@@ -21,12 +22,15 @@ float kd = 1;
 int speed = 50;
 
 void setup() {
+      move(right, left, 255);
+      delay(2000);
       Wire.begin();
-      gyro.start(-53,-1,96,988);
+      gyro.start(-52,93,-1,985);
 }
 void loop() {
 // accepts float origin                
       float angle = gyro.getangle();
+      Serial.println(angle);
       float cfac = angle;
       float setoff = origin - cfac;
     

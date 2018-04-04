@@ -12,8 +12,10 @@ class Motor
     
     void brake();
     
-    int min_speed, max_speed;
-    
+    int counter=0;
+    int low_speed=20;
+    int cycle=10;
+
     private:
     
     int In1, In2;
@@ -23,8 +25,10 @@ class Motor
     
 };
 
-void minspeed(int _min_speed);
-void maxspeed(int _max_speed);
+//int min_speed = 20, max_speed = 255;
+
+//void minspeed(int _min_speed);
+//void maxspeed(int _max_speed);
 int speedcheck(int _speed);
 
 void move(Motor right, Motor left, int speed);

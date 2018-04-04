@@ -11,18 +11,19 @@ Motor::Motor(int In1pin, int In2pin)
     pinMode(In2, OUTPUT);
 }
 
-void minspeed(int _min_speed){
-    _min_speed = min_speed;
-}
+//void minspeed(int _min_speed){
+//    min_speed = _min_speed;
+//}
+//
+//void maxspeed(int _max_speed){
+//    max_speed = _max_speed;
+//}
 
-void maxspeed(int _max_speed){
-    _max_speed = max_speed;
-}
-
-int speedcheck(int _speed){
-    if (_speed<min_speed) return min_speed;
-    if (_speed>max_speed) return max_speed;
-}
+//int speedcheck(int _speed){
+//    if (_speed<min_speed) return min_speed;
+//    if (_speed>max_speed) return max_speed;
+//    else return _speed;
+//}
 
 void Motor::fwd(int speed)
 {
@@ -45,32 +46,43 @@ void Motor::brake()
 void Motor::drive(int speed)
 {
     if (speed==0) brake();
-    if (speed>0) fwd(speedcheck(speed));
-    if (speed<0) rev(-speedcheck(speed));
+//    if (speed>0) fwd(speedcheck(speed));
+//    if (speed<0) rev(-speedcheck(speed));
+    if (speed>0) fwd(speed);
+    if (speed<0) rev(-speed);
 }
 
 void move(Motor right, Motor left, int speed)
 {
-    right.drive(speedcheck(speed));
-    left.drive(speedcheck(speed));
+//    right.drive(speedcheck(speed));
+//    left.drive(speedcheck(speed));
+    right.drive(speed);
+    left.drive(speed);
 }
 
 void move(Motor right, Motor left, int speed, int difference)
 {   int temp = difference/2;
-    right.drive(speedcheck(speed+temp));
-    left.drive(speedcheck(speed-temp));
+//    right.drive(speedcheck(speed+temp));
+//    left.drive(speedcheck(speed-temp));
+    right.drive(speed+temp);
+    left.drive(speed-temp);
+
 }
 
 void turnright(Motor right, Motor left, int speed)
 {
-    left.drive(speedcheck(speed));
-    right.drive(-speedcheck(speed));
+//    left.drive(speedcheck(speed));
+//    right.drive(-speedcheck(speed));
+    left.drive(speed);
+    right.drive(-speed);
 }
 
 void turnleft(Motor right, Motor left, int speed)
 {
-    left.drive(-speedcheck(speed));
-    right.drive(speedcheck(speed));
+//    left.drive(-speedcheck(speed));
+//    right.drive(speedcheck(speed));
+    left.drive(-speed);
+    right.drive(speed);
 }
 
 void brake(Motor right, Motor left)
@@ -79,7 +91,20 @@ void brake(Motor right, Motor left)
     left.brake();
 }
 
+void pwmove(Motor right, Motor left, int speed, int difference){
+    if (right.counter>right.cycle) right.counter = 0;
+    if (right.counter==0){
+        move(right,left,speed,difference);
+    }
+    else{
+        move(right,left,right.low_speed);
+    }
+    right.counter++;
+}
 
+void pwmturn(Motor right, Motor left, int speed){
+    pwmove(right,left,0,2*speed);
+}
 
 
 
