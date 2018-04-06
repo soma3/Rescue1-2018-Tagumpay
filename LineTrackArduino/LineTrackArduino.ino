@@ -5,7 +5,7 @@ int incoming[2];
 int diff;
 int avg;
 int motorleft, motorright;
-int counter = 0
+int counter = 0;
 
 void setup() {
 Serial.begin(9600);
