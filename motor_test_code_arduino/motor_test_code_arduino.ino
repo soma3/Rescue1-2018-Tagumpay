@@ -9,7 +9,7 @@ int counter = 0;
 
 void loop() {
   // put your main code here, to run repeatedly:  
-   counter = pwmove(right,left, 110, 0,counter);
+   counter = pwmove(right,left, 140, 0,counter);
    Serial.println(counter);
 
 }
