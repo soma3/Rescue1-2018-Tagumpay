@@ -46,7 +46,7 @@ def greenPosn (hsv): #takes a hsv image and returns if there's green, where and 
 	uppergreen = np.array([110, 255, 255])
 	greenimg = cv2.inRange(hsv, lowergreen, uppergreen) #turns green to white and not green to black
 	image,contour,heirarchy = cv2.findContours(greenimg, mode = cv2.RETR_EXTERNAL, method = cv2.CHAIN_APPROX_NONE) #finds contours
-    area = 0
+        area = 0
 	xgreen = 0
 	ygreen = 0
 	for x in contour:
@@ -110,6 +110,8 @@ def serPrint(r,l): #takes a percentage of max power for each motor value, change
         l = -100
     l = int((l/100)*127) #scales values from -127 to 127
     r = int((r/100)*127)
+    r = 80
+    l = 80
     print 'start'
     print r
     print l
@@ -142,7 +144,7 @@ def dashLines():
 def turn(time, dir): #turns right or left for a certain number of seconds if specified or else till a line is in the middle
 #if dir = 1 turn right, if dir = -1 turn left
 	if time > 0 : #if a time is specified
-		t0 = time.time() #finds current time in timer
+		t0 = time.time() #finds current time in timer
 		while time.time() - t0 < time: #for the time specified
 			serPrint(-dir*turnspeed, dir*turnspeed) #turn in the direction
 	elif dir > 0: #if there isn't at time specified 
@@ -189,6 +191,7 @@ ki = 0
 kd = 1
 lasterror = 0 
 turnspeed = 30
+preverror = 0
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 	image = frame.array
@@ -196,7 +199,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         rotated = imutils.rotate_bound(resized,90)
         height,width, channel = rotated.shape
         crop = rotated[height-smallSlice:height,0:width]
-		hsv = cv2.cvtColor(crop, cv2.COLOR_RGB2HSV)
+	hsv = cv2.cvtColor(crop, cv2.COLOR_RGB2HSV)
         hsv = hsv[height-smallSlice:height,0:width]
         gray = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY) # convert to grayscale
         blur = cv2.GaussianBlur(gray,(5,5),0) # remove noise

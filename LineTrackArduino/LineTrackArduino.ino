@@ -9,6 +9,7 @@ int counter = 0;
 
 void setup() {
 Serial.begin(9600);
+delay(10000);
 move(right,left,150,0);
 delay(10000);
 }
