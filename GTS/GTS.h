@@ -7,8 +7,9 @@ class GTS
 {
   public:
     void gyroturn(int nextpos);
-    void gyrostraight(float desipos);
+    void gyrostraight(float _origin);
     pid(float kp, float ki, float kd);
+    float _integral
   private:
     int _currentpos;
     int _nextpos;
