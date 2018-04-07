@@ -11,7 +11,7 @@
 #include <I2Cdev.h>
 
 MPU6050 gyro;
-Motor left(6,5), right(10,9);
+Motor left(5,6), right(10,9);
 float origin = 0;
 float integral = 0;
 float lasterror = 0;
@@ -19,7 +19,7 @@ float kp = 1;
 float ki = 1;
 float kd = 1;
 
-int speed = 50;
+int speed = 100;
 
 void setup() {
       move(right, left, 255);
