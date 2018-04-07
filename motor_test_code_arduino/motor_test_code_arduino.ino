@@ -8,8 +8,10 @@ void setup() {
 int counter = 0;
 
 void loop() {
+  //right.fwd(80);
+  //left.fwd(50);
   // put your main code here, to run repeatedly:  
-   counter = pwmove(right,left, 140, 0,counter);
+   //counter = pwmove(right,left, 180, 0,counter);
    Serial.println(counter);
 
 }
