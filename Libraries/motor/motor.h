@@ -37,5 +37,7 @@ void brake(Motor right, Motor left);
 
 void turnleft(Motor right, Motor left, int speed);
 void turnright(Motor right, Motor left, int speed);
+void pwmove(Motor right, Motor left, int speed, int difference);
+void pwmturn(Motor right, Motor left, int speed);
 
 #endif
