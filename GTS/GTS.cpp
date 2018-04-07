@@ -37,10 +37,9 @@ void GTS::gyroturn(int nextpos)
   }
 }
 
-void GTS::gyrostraight(float desipos)
+void GTS::gyrostraight(float _origin)
 {
  MPU6050 gyro;
- float _origin = 0;
  float _integral = 0;
  float _lasterror = 0;
 
