@@ -10,7 +10,11 @@ MPU6050 mpu;
 #define OUTPUT_READABLE_EULER
 #define LED_PIN 13 // (Arduino is 13, Teensy is 11, Teensy++ is 6)
 bool blinkState = false;/////./≥≥≥≥≥/≥≥≥……………………≥;
+<<<<<<< HEAD
 //test test test
+=======
+//sorry i added wrongly
+>>>>>>> a2a5bc805df0aee22acfe8ad4206165a91674436
 // MPU control/status vars
 bool dmpReady = false;  // set true if DMP init was successful
 uint8_t mpuIntStatus;   // holds actual interrupt status byte from MPU
