@@ -2,13 +2,13 @@
 #include <Arduino.h>
 #include <motor.h>
 
-Motor::Motor(int In1pin, int In2pin)
+Motor::Motor(int digitalpin, int analogpin)
 {
-    In1 = In1pin;
-    In2 = In2pin;
+    _digitalpin = digitalpin;
+    _analogpin = analogpin;
     
-    pinMode(In1, OUTPUT);
-    pinMode(In2, OUTPUT);
+    pinMode(_digitalpin, OUTPUT);
+    pinMode(_analogpin, OUTPUT);
 }
 
 //void minspeed(int _min_speed){
@@ -19,28 +19,31 @@ Motor::Motor(int In1pin, int In2pin)
 //    max_speed = _max_speed;
 //}
 
-//int speedcheck(int _speed){
-//    if (_speed<min_speed) return min_speed;
-//    if (_speed>max_speed) return max_speed;
+//int Motor::speedcheck(int _speed){
+//    int sign = 0;
+//    if (_speed>0) sign = 1;
+//    if (_speed<0) sign = -1;
+//    if (abs(_speed)<min_speed) return sign*min_speed;
+//    if (abs(_speed)>max_speed) return sign*max_speed;
 //    else return _speed;
 //}
 
 void Motor::fwd(int speed)
 {
-    analogWrite(In1, speed);
-    analogWrite(In2, 0);
+    digitalWrite(_digitalpin, LOW);
+    analogWrite(_analogpin, speed);
 }
 
 void Motor::rev(int speed)
 {
-    analogWrite(In1, 0);
-    analogWrite(In2, speed);
+    digitalWrite(_digitalpin, HIGH);
+    analogWrite(_analogpin, (255-speed));
 }
 
 void Motor::brake()
 {
-    analogWrite(In1, 0);
-    analogWrite(In2, 0);
+    digitalWrite(_digitalpin, LOW);
+    analogWrite(_analogpin, 0);
 }
 
 void Motor::drive(int speed)
@@ -91,19 +94,19 @@ void brake(Motor right, Motor left)
     left.brake();
 }
 
-int pwmove(Motor right, Motor left, int speed, int difference, int counter){
-    if (counter>right.cycle) counter = 0;
-    if (counter==0){
+void pwmove(Motor right, Motor left, int speed, int difference){
+    if (right.counter>right.cycle) right.counter = 0;
+    if (right.counter==0){
         move(right,left,speed,difference);
     }
     else{
         move(right,left,right.low_speed);
     }
-    return (counter+1) ;
+    right.counter++;
 }
 
-int pwmturn(Motor right, Motor left, int speed, int counter){
-    pwmove(right,left,0,2*speed,counter);
+void pwmturn(Motor right, Motor left, int speed){
+    pwmove(right,left,0,2*speed);
 }
 
 

@@ -1,6 +1,6 @@
 #include <motor.h>
 
-Motor left(5,6), right(10,9); 
+Motor left(4,5), right(7,6); 
 void setup() {
     Serial.begin(9600);
 
@@ -12,7 +12,7 @@ void loop() {
   // put your main code here, to run repeatedly:  
     Serial.println(counter); 
     if (counter==0) {
-      move(right,left,110);
+      move(right,left,130);
       counter++;
     }
     else {
@@ -25,11 +25,11 @@ void loop() {
       
 //    brake(right,left);
 //    delay(2000);
-//    move(right,left,-200,50);
+//    move(right,left,-80,50);
 //    delay(2000);
 //    brake(right,left);
 //    delay(2000);
-//    move(right,left,200,-50);
+//    move(right,left,80,-50);
 //    delay(2000);
 //    brake(right,left);
 //    delay(2000);
