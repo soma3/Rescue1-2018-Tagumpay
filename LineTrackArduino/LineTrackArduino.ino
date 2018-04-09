@@ -24,5 +24,7 @@ void loop() {
   move(right,left,avg,diff);
     }
 }
+
+//GERALD CHOO HAS ISSUES 
     
 
