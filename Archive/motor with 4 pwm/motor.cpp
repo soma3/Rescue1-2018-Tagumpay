@@ -91,19 +91,19 @@ void brake(Motor right, Motor left)
     left.brake();
 }
 
-int pwmove(Motor right, Motor left, int speed, int difference, int counter){
-    if (counter>right.cycle) counter = 0;
-    if (counter==0){
+void pwmove(Motor right, Motor left, int speed, int difference){
+    if (right.counter>right.cycle) right.counter = 0;
+    if (right.counter==0){
         move(right,left,speed,difference);
     }
     else{
         move(right,left,right.low_speed);
     }
-    return (counter+1) ;
+    right.counter++;
 }
 
-int pwmturn(Motor right, Motor left, int speed, int counter){
-    pwmove(right,left,0,2*speed,counter);
+void pwmturn(Motor right, Motor left, int speed){
+    pwmove(right,left,0,2*speed);
 }
 
 

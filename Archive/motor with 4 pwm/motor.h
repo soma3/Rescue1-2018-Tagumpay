@@ -12,16 +12,16 @@ class Motor
     
     void brake();
     
-    int low_speed=30;
+    int counter=0;
+    int low_speed=20;
     int cycle=10;
-    void fwd(int speed);
 
     private:
     
     int In1, In2;
     
+    void fwd(int speed);
     void rev(int speed);
-
     
 };
 
@@ -37,12 +37,7 @@ void brake(Motor right, Motor left);
 
 void turnleft(Motor right, Motor left, int speed);
 void turnright(Motor right, Motor left, int speed);
-<<<<<<< HEAD
 void pwmove(Motor right, Motor left, int speed, int difference);
 void pwmturn(Motor right, Motor left, int speed);
-=======
-int pwmove(Motor right, Motor left, int speed, int difference, int counter);
-int pwmturn(Motor right, Motor left, int speed, int counter);
->>>>>>> 28144bd60d3becb50b7a3320466eb4f3c26ecdd6
 
 #endif
