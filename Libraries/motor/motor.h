@@ -9,14 +9,16 @@ class Motor
     Motor(int digitalpin, int analogpin);
     
     void drive(int speed);
+    int pwmdrive(int speed, int _counter);
     
     void brake();
     int speedcheck(int _speed);
     
     int counter=0;
-    int low_speed=20;
-    int cycle=10;
-    int min_speed = 20, max_speed = 255;
+    int low_speed=30;
+    int cycle=20;
+    int scaling_constant=100;
+    int min_speed = 40, max_speed = 255;
 
     private:
     
@@ -36,7 +38,9 @@ void brake(Motor right, Motor left);
 
 void turnleft(Motor right, Motor left, int speed);
 void turnright(Motor right, Motor left, int speed);
-void pwmove(Motor right, Motor left, int speed, int difference);
+void turn(Motor right, Motor left, int speed);
+//void pwmove(Motor right, Motor left, int speed, int difference);
+int pwmove(Motor right, Motor left, int speed, int difference, int _counter);
 void pwmturn(Motor right, Motor left, int speed);
 
 #endif

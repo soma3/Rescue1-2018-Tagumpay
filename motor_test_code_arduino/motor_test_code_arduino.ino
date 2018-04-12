@@ -12,7 +12,7 @@ void loop() {
   // put your main code here, to run repeatedly:  
     Serial.println(counter); 
     if (counter==0) {
-      move(right,left,130);
+      move(right,left,140);
       counter++;
     }
     else {

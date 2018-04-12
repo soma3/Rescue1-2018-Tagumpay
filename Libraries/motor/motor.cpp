@@ -19,14 +19,14 @@ Motor::Motor(int digitalpin, int analogpin)
 //    max_speed = _max_speed;
 //}
 
-//int Motor::speedcheck(int _speed){
-//    int sign = 0;
-//    if (_speed>0) sign = 1;
-//    if (_speed<0) sign = -1;
-//    if (abs(_speed)<min_speed) return sign*min_speed;
-//    if (abs(_speed)>max_speed) return sign*max_speed;
-//    else return _speed;
-//}
+int Motor::speedcheck(int _speed){
+    int sign = 0;
+    if (_speed>0) sign = 1;
+    if (_speed<0) sign = -1;
+    if (abs(_speed)<min_speed) return sign*min_speed;
+    if (abs(_speed)>max_speed) return sign*max_speed;
+    else return _speed;
+}
 
 void Motor::fwd(int speed)
 {
@@ -88,26 +88,61 @@ void turnleft(Motor right, Motor left, int speed)
     right.drive(speed);
 }
 
+void turn(Motor right, Motor left, int speed){
+    if (speed>0){
+        turnright(right,left,speed);
+    }
+    if (speed<0){
+        turnleft(right,left,-speed);
+    }
+}
+
 void brake(Motor right, Motor left)
 {
     right.brake();
     left.brake();
 }
 
-void pwmove(Motor right, Motor left, int speed, int difference){
-    if (right.counter>right.cycle) right.counter = 0;
-    if (right.counter==0){
-        move(right,left,speed,difference);
+//void pwmove(Motor right, Motor left, int speed, int difference, int counter){
+//    if (right.counter>right.cycle) right.counter = 0;
+//    if (right.counter==0){
+//        move(right,left,speed,difference);
+//    }
+//    else{
+//        move(right,left,right.low_speed);
+//    }
+//    right.counter++;
+//}
+//
+//void pwmturn(Motor right, Motor left, int speed){
+//    pwmove(right,left,0,2*speed);
+//}
+
+
+int Motor::pwmdrive(int speed, int _counter){
+    counter = _counter;
+    if (counter>cycle) counter = 0;
+    if (counter == 0){
+        if (speed==0) brake();
+        if (speed>0) fwd(speed);
+        if (speed<0) rev(-speed);//rev() takes in positive speed
     }
     else{
-        move(right,left,right.low_speed);
+        if (speed==0) brake();
+        if (speed>0) fwd((speed/scaling_constant)*low_speed);
+        if (speed<0) rev((-speed/scaling_constant)*low_speed);//rev() is taking in positive speed
     }
-    right.counter++;
+    counter = counter + 1;
+    return counter;
 }
 
-void pwmturn(Motor right, Motor left, int speed){
-    pwmove(right,left,0,2*speed);
+int pwmove(Motor right, Motor left, int speed, int difference, int _counter){
+    int temp = difference/2;
+    right.pwmdrive(speed+temp,_counter);
+    left.pwmdrive(speed-temp,_counter);
+    return right.counter;
 }
+
 
 
 

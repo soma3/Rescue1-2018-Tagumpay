@@ -839,7 +839,6 @@ class MPU6050 {
 
             uint8_t dmpInitialize();
             void start(int8_t Xoffset, int8_t Yoffset, int8_t Zoffset, int16_t Zacceloffset);//added
-            float getrawangle();//added
             float getangle();//added
             void scamreset();//added
             bool dmpPacketAvailable();
