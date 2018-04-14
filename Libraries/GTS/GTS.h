@@ -21,7 +21,9 @@
  float _kp = 5;
  float _ki;
  float _kd;
- int counter = 0;
+ int GTScounter = 0;
+ unsigned long timenow;
+ unsigned long starttime;
 
 void gyroturn(Motor right,Motor left,int nextpos, MPU6050 gyro){
     while (0==0){
@@ -79,11 +81,19 @@ void gyrostraight(Motor right,Motor left,float _origin, int _speed, MPU6050 gyro
     float _integral = _integral + _setoff;
     float _derivative = _setoff - _lasterror;
     float _correction = (_kp*_setoff + _ki*_integral + _kd*_derivative)*2;
-    counter = pwmove(right, left, _speed, _correction, counter);
+    GTScounter = pwmove(right, left, _speed, _correction, GTScounter);
    //move(right, left, _speed, _correction);
     
     _lasterror = _setoff ;
 }//added speed
+
+void gyrostraight(Motor right,Motor left,float _origin, int _speed, MPU6050 gyro, int duration){
+    starttime = millis();
+    while (millis()-starttime<duration){
+        gyrostraight(right,left,_origin,_speed,gyro);
+    }
+}//not tested!!!!
+
 void pid(float kp, float ki, float kd){
     float _kp = kp;
     float _ki = ki;

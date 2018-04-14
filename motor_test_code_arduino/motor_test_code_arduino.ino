@@ -1,27 +1,25 @@
 #include <motor.h>
-
-Motor left(4,5), right(7,6); 
+int counter = 0;
+Motor left(7,6), right(4,5); 
 void setup() {
     Serial.begin(9600);
 
 }
 
-int counter = 0;
-
 void loop() {
   // put your main code here, to run repeatedly:  
-    Serial.println(counter); 
-    if (counter==0) {
-      move(right,left,140);
-      counter++;
-    }
-    else {
-      move(right, left, 20);
-      counter++;
-    }
-    if (counter > 10){
-    counter = 0;
-    }
+//    Serial.println(counter); 
+//    if (counter==0) {
+//      move(right,left,140);
+//      counter++;
+//    }
+//    else {
+//      move(right, left, 20);
+//      counter++;
+//    }
+//    if (counter > 10){
+//    counter = 0;
+//    }
       
 //    brake(right,left);
 //    delay(2000);
@@ -42,5 +40,7 @@ void loop() {
 //    brake(right,left);
 //    delay(2000);
 
+counter = pwmove(right,left,255,0,counter);
+ 
 }
     

@@ -28,14 +28,14 @@ void loop() {
 
 //12.4.18
 //Serial.println("Start");
-//gyroturn(right, left, 270, gyro);
-//delay(2000);
-//gyroturn(right, left, 180, gyro);
-//delay(2000);
-//gyroturn(right, left, 90, gyro);
-//delay(2000);
-//gyroturn(right, left, 0, gyro);
-//delay(2000);
+gyroturn(right, left, 270, gyro);
+delay(2000);
+gyroturn(right, left, 180, gyro);
+delay(2000);
+gyroturn(right, left, 90, gyro);
+delay(2000);
+gyroturn(right, left, 0, gyro);
+delay(2000);
 //Serial.println(gyro.getangle());
 //Serial.println(_currentpos);
 //Serial.println(_adjust);
@@ -45,7 +45,7 @@ void loop() {
 
 //
 //Serial.println(gyro.getangle());
-gyrostraight(right,left,0,180,gyro);
+//gyrostraight(right,left,0,180,gyro);
 //right.drive(80);
 //Serial.println(_cfac);
 //speedcheck() works :>
