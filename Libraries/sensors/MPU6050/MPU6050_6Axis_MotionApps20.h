@@ -781,18 +781,18 @@ float MPU6050::getrawangle(){
     fifoCount = getFIFOCount();
     
     //    if ((mpuIntstatus & 0x10)||fifoCount==1024)
-    if (fifoCount > 1023){
+//    if (fifoCount >= 1024){
         resetFIFO();
-    //}
+//    }
     //    else if (mpuIntstatus & 0x02)
-    //else{//comment this condition if neccessary?
+//    else{//comment this condition if neccessary?
         while (fifoCount<packetSize) fifoCount = getFIFOCount();
         getFIFOBytes(fifoBuffer,packetSize);
         fifoCount -= packetSize;
         
         dmpGetQuaternion(&q, fifoBuffer);
         dmpGetEuler(euler,&q);
-    //}
+//    }
     return euler[0] * 180/M_PI;
 }
 

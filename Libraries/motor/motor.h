@@ -18,7 +18,7 @@ class Motor
     int low_speed=30;
     int cycle=20;
     int scaling_constant=100;
-    int min_speed = 40, max_speed = 255;
+    int min_speed = 120, max_speed = 255;
 
     private:
     

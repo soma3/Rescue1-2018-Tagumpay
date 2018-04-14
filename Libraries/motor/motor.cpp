@@ -124,8 +124,8 @@ int Motor::pwmdrive(int speed, int _counter){
     if (counter>cycle) counter = 0;
     if (counter == 0){
         if (speed==0) brake();
-        if (speed>0) fwd(speed);
-        if (speed<0) rev(-speed);//rev() takes in positive speed
+        if (speed>0) fwd(speedcheck(speed));
+        if (speed<0) rev(speedcheck(-speed));//rev() takes in positive speed
     }
     else{
         if (speed==0) brake();
