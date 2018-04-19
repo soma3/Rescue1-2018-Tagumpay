@@ -836,12 +836,18 @@ class MPU6050 {
             Quaternion q; //quaternation container
             float euler[3]; //Euler angle container
             int offsetforreset;
+            int8_t _Xoffset = -52;
+            int8_t _Yoffset = 93;
+            int8_t _Zoffset = -1;
+            int8_t _Zacceloffset = 985;
 
             uint8_t dmpInitialize();
             void start(int8_t Xoffset, int8_t Yoffset, int8_t Zoffset, int16_t Zacceloffset);//added
+            void start();//added
             float getrawangle();//added
             float getangle();//added
             void scamreset();//added
+            void scamresetto(int angle);//added
             int ranger();//added
             bool dmpPacketAvailable();
 

@@ -28,21 +28,23 @@ def evaczonedetection(img,evaczone):
     ret, bin = cv2.threshold(blur, 20, 255, cv2.THRESH_BINARY_INV)
     image, contours, h = cv2.findContours(bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     circles = cv2.HoughCircles(bin, cv2.HOUGH_GRADIENT, 1.2, 50, param1=80, param2=80, minRadius=15)
-    if circles is not None:
-      circles = np.round(circles[0, :]).astype("int")
-      for (x,y,r) in circles:
-        if ((x<x2)or(x>x2+w)) and ((y<y2)or(y>y2+h)):
-            evaczone=1
-        cv2.circle(output, (x, y), r, (0, 255, 0), 4)
-        cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1)
-        print "start"
-        print x
-        print y
-        print r
     for cnt in contours:
         x2,y2,w,h = cv2.boundingRect(cnt)
         ratio = float(w)/float(h) #w/h if camera rotated
-        if (ratio>threshold) and (w>minheight): #w>minheight if camera rotated
+        if circles is not None:
+      	  circles = np.round(circles[0, :]).astype("int")
+          for (x,y,r) in circles:
+          # if ((x<x2)or(x>x2+w)) and ((y<y2)or(y>y2+h)):
+#             evaczone=1
+          if (ratio>thresholdwithcircles) and (w>minheight): #w>minheight if camera rotated
+            evaczone=1
+          cv2.circle(output, (x, y), r, (0, 255, 0), 4) #f
+          cv2.rectangle(output, (x - 5, y - 5), (x + 5, y + 5), (0, 128, 255), -1) #f
+          print "circle" #f
+          print x #f
+          print y #f
+          print r #f
+        elif (ratio>threshold) and (w>minheight): #w>minheight if camera rotated
             evaczone=1
 #        ser.write(struct.pack('b',evaczone)
         cv2.rectangle(output, (x2,y2), (x2+w,y2+h), (255,0,0),2) #for debugging

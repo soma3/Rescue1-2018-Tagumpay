@@ -772,6 +772,9 @@ void MPU6050::start(int8_t Xoffset, int8_t Yoffset, int8_t Zoffset, int16_t Zacc
     }
 }
 
+void MPU6050::start(){
+	start(_Xoffset,_Yoffset,_Zoffset,_Zacceloffset);
+}
 
 float MPU6050::getrawangle(){
     //if we using interrupt?
@@ -798,6 +801,10 @@ float MPU6050::getrawangle(){
 
 void MPU6050::scamreset(){
     offsetforreset = getrawangle();
+}
+
+void MPU6050::scamresetto(int angle){
+	offsetforreset = getrawangle() - angle;
 }
 
 float MPU6050::getangle(){
